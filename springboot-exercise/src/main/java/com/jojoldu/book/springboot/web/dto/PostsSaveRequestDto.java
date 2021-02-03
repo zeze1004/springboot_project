@@ -12,12 +12,14 @@ import java.time.LocalDateTime;
 
 public class PostsSaveRequestDto {
     private String content;
+    private Long emotion;
     private LocalDateTime createdTimeAt;
     private LocalDateTime updateTimeAt;
 
     @Builder
-    public PostsSaveRequestDto(String content) {
+    public PostsSaveRequestDto(String content, Long emotion) {
         this.content = content;
+        this.emotion = emotion;
         final LocalDateTime now = LocalDateTime.now();
         createdTimeAt = now;
         updateTimeAt = now;
@@ -25,6 +27,7 @@ public class PostsSaveRequestDto {
 
     public Posts toEntity() {
         return Posts.builder()
+                .emotion(emotion)
                 .content(content)
                 .build();
     }
